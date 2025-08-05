@@ -48,7 +48,7 @@ group :development, :test do
   gem "rspec-rails", "~> 6.0"
   gem "factory_bot_rails", "~> 6.4"
   gem "faker", "~> 3.2"
-  gem "shoulda-matchers", "~> 5.3"
+  gem "shoulda-matchers", "~> 6.5"
   gem "rails-controller-testing", "~> 1.0"
   gem "capybara", "~> 3.39"
 end
