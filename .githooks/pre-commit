@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Run RuboCop on staged Ruby files
+ruby_files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(rb|rake|jbuilder)$')
+
+if [ -n "$ruby_files" ]; then
+  echo "Running RuboCop on staged Ruby files..."
+  bundle exec rubocop --force-exclusion $ruby_files
+  
+  # Capture the exit code of RuboCop
+  rubocop_exit_code=$?
+  
+  # If RuboCop found issues, exit with non-zero status to prevent commit
+  if [ $rubocop_exit_code -ne 0 ]; then
+    echo "\nRuboCop found issues that need to be fixed before committing."
+    echo "You can try running 'bundle exec rubocop -a' to auto-correct some issues."
+    exit 1
+  fi
+fi
+
+exit 0

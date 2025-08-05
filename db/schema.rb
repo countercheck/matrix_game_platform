@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_04_232301) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_05_001128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.text "description", null: false
+    t.integer "max_participants", null: false
+    t.integer "min_participants", null: false
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_games_on_name", unique: true
+    t.check_constraint "max_participants > 0", name: "max_participants_positive"
+    t.check_constraint "max_participants >= min_participants", name: "max_gte_min_participants"
+    t.check_constraint "min_participants > 0", name: "min_participants_positive"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"

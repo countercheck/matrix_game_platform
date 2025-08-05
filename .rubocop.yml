@@ -1,8 +1,123 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_from: .rubocop_todo.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+# This is a simpler RuboCop configuration for Rails applications
+# that avoids inheritance issues while still providing good defaults
+
+# Required extensions
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rake
+
+# Common configuration
+AllCops:
+  # Only enable cops explicitly listed in this file
+  DisabledByDefault: true
+  
+  # Exclude common directories from analysis
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'storage/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'config/**/*'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'config.ru'
+
+# Style Guide Enforcements
+Layout/LineLength:
+  Enabled: true
+  Max: 120
+  AllowHeredoc: true
+  AllowURI: true
+  IgnoreCopDirectives: true
+
+# Rails specific cops
+Rails:
+  Enabled: true
+
+# Performance cops
+Performance/CollectionLiteralInLoop:
+  Enabled: true
+
+Performance/ConstantRegexp:
+  Enabled: true
+
+# Style cops
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Metrics cops
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'config/routes.rb'
+    - 'config/environments/*.rb'
+
+Metrics/ClassLength:
+  Enabled: true
+  Max: 250
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/MethodLength:
+  Enabled: true
+  Max: 30
+  Exclude:
+    - 'db/migrate/*.rb'
+    - 'spec/**/*.rb'
+
+# RSpec cops
+RSpec/ExampleLength:
+  Enabled: true
+  Max: 15
+  Exclude:
+    - 'spec/features/**/*.rb'
+
+RSpec/MultipleExpectations:
+  Enabled: true
+  Max: 5
+
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 5
+
+# FactoryBot cops
+RSpec/FactoryBot/AttributeDefinedStatically:
+  Enabled: true
+  EnforcedStyle: "explicit"
+
+RSpec/FactoryBot/CreateList:
+  Enabled: true
+
+# Enable a few more useful cops
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: true
+
+Style/RedundantSelf:
+  Enabled: true
+
+# Lint cops
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+# Security cops
+Security/Open:
+  Enabled: true

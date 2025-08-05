@@ -49,9 +49,9 @@ RSpec.describe SessionsController, type: :controller do
         expect(response).to render_template(:new)
       end
 
-      it 'returns unprocessable entity status' do
+      it 'returns unprocessable content status' do
         post :create, params: { email: 'wrong@example.com', password: 'password123' }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'sets an error flash message' do
@@ -71,9 +71,9 @@ RSpec.describe SessionsController, type: :controller do
         expect(response).to render_template(:new)
       end
 
-      it 'returns unprocessable entity status' do
+      it 'returns unprocessable content status' do
         post :create, params: { email: 'test@example.com', password: 'wrongpassword' }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'sets an error flash message' do
