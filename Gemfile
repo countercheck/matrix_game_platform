@@ -49,7 +49,7 @@ group :development, :test do
   gem "rubocop-rake", "~> 0.6.0", require: false
 
   # Testing framework
-  gem "rspec-rails", "~> 8.0.1"
+  gem "rspec-rails", "~> 8.0.2"
   gem "factory_bot_rails", "~> 6.4"
   gem "faker", "~> 3.2"
   gem "shoulda-matchers", "~> 5.3"
